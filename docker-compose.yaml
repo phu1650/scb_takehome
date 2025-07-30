@@ -1,13 +1,15 @@
 version: "3.9"
 
 services:
-  fraud:
+  fraud_detection:
     build: .
-    container_name: fastapi_app
+    container_name: fraud_detection
     ports:
       - "8000:8000"
     volumes:
       - ./app/db:/app/db
-    environment:
-      - PYTHONPATH=/code
     command: uvicorn main:app --host 0.0.0.0 --port 8000
+    environment:
+      - THRESHOLD=0.97145
+      - MODEL_PATH=model/xgb_pipeline.pkl
+      - SQLALCHEMY_DATABASE_URL=sqlite:///./db/transaction.db
