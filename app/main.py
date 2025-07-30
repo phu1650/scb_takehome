@@ -6,12 +6,14 @@ from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
 import pandas as pd
 import joblib
+import os
 
 Base.metadata.create_all(bind=engine)
 
 
 model = {}
-OPTIMAL_THRESH = 0.4004254
+THRESHOLD = float(os.getenv("THRESHOLD"))
+MODEL_PATH = os.getenv("MODEL_PATH")
 
 def get_db():
     try:
@@ -22,7 +24,7 @@ def get_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    model["fraud"] = joblib.load("model/xgb_pipeline.pkl")
+    model["fraud"] = joblib.load(MODEL_PATH)
     yield
     model.clear()
 
@@ -35,7 +37,7 @@ def predict(request:TransactionScheman, db: Session = Depends(get_db)):
                              "dst_bal": [request.dst_bal], 
                              "transac_type": [request.transac_type]})
     probability = model["fraud"].predict_proba(input_df)[:, 1]
-    prediction = (probability >= OPTIMAL_THRESH)[0]
+    prediction = (probability >= THRESHOLD)[0]
     transaction = Transaction(amount=request.amount, 
                               src_bal=request.src_bal, 
                               dst_bal=request.dst_bal, 
