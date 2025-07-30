@@ -4,3 +4,4 @@ scikit-learn==1.6.0
 matplotlib==3.10.3
 imbalanced-learn==0.13.0
 xgboost==3.0.2
+optuna==4.4.0
