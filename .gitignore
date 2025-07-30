@@ -1,4 +1,3 @@
 notebooks/data/*
-app/model/*
 app/db/*
 .DS_Store
