@@ -2,9 +2,9 @@
 
 This documentation has 3 sections including
 
-- [Setup jupyter environment (EDA/Training)](#️setup-jupyter-environment-eda--training)
-- [Run/Test model serving endpoint](#️run--test-model-serving-endpoint)
-- [Architecture explanation](#️architecture-explanation)
+- Setup jupyter environment (EDA/Training)
+- Run/Test model serving endpoint
+- Architecture explanation
 
 ## Setup jupyter environment (EDA/Training) 
 
