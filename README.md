@@ -39,6 +39,9 @@ pip install -r notebooks/requirements-notebooks.txt
 - Download fraud_mock.csv into that directory
 - After that you can now run fraud.ipynb
 
+### 6 Run notebook
+- just click run every cell according to their order
+
 ## Run/Test model serving
 
 ### 1 create database directory
